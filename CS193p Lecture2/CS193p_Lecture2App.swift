@@ -10,8 +10,8 @@ import SwiftUI
 @main
 struct CS193p_Lecture2App: App {
     var body: some Scene {
-        DocumentGroup(newDocument: CS193p_Lecture2Document()) { file in
-            ContentView(document: file.$document)
+        WindowGroup {
+            ContentView()
         }
     }
 }
