@@ -1,6 +1,4 @@
-# Swift 
-# 기본
-#  syntax
+### Swift 기본 syntax
 
 - var 선언시 파이썬에서는 무조건 값을 지정해야 했다. 값을 지정하면 파이썬은 그 값의 타입을 인식한다. (물론 str 에서 int로 변경해도 아무 문제 없지만) 스위프트는 strongly typed language 라서 좀 다르다. 일단 var을 생성할 때 value 없이 타입만 지정해줘도 된다. 그래서 init 이 있나보다. var이 있어도 값이 없는 경우가 있으니까. 즉 다음 세가지의 경우가 모두 가능하다.
 - var age: Int // var age = 49 // var age: Int = 49
