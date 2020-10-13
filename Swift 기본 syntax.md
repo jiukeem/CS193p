@@ -1,4 +1,6 @@
-### Swift 기본 syntax
+# Swift 
+# 기본
+#  syntax
 
 - var 선언시 파이썬에서는 무조건 값을 지정해야 했다. 값을 지정하면 파이썬은 그 값의 타입을 인식한다. (물론 str 에서 int로 변경해도 아무 문제 없지만) 스위프트는 strongly typed language 라서 좀 다르다. 일단 var을 생성할 때 value 없이 타입만 지정해줘도 된다. 그래서 init 이 있나보다. var이 있어도 값이 없는 경우가 있으니까. 즉 다음 세가지의 경우가 모두 가능하다.
 - var age: Int // var age = 49 // var age: Int = 49
@@ -57,4 +59,47 @@ var easyAsPie = (saying: "easy as", amount: 3.14)
 var firstElementValue = easyAsPie.saying  // "easy as"
 var secondElementValue = easyAsPie.amount // 3.14
 - 딕셔너리로 포문을 돌릴 때 key 와 value를 ()로 묶는 것도 튜플이다. 
+
+func functionName(paramName: paramType) -> returnType {
+ // function's task goes here
+} 
+- function의 기본 syntax로, 파이썬과 달리 -> returnType이나 paramType은 필수인 듯 하다(확실히 strongly-typed 가 맞네..) 만약 아무것도 return하지 않는다면 -> 을 아예 빼버리거나 -> Void 로 쓰면 된다.
+- 앗 그런데 파이썬과 크게 다른 부분이 있다
+
+let birthYear = 1994
+var currentYear = 2020
+
+func findAge() -> Int {
+  return currentYear - birthYear
+}
+- 함수의 parameter로 넣지 않은 외부 variable(global variable)도 그냥 가져다 쓴다! 파이썬이라면 오류가 날텐데. 흠 이 부분 좀 헷갈린다. 근데 어쨌든 global을 막 갖다쓰면 코드가 조잡해질테니 parameter로 관리하는게 좋겠지
+- 스위프트의 funtion은 한개의 값만 return할 수 있는것 같다(파이썬은 여러개 가능). 그래서 여러개를 return하고 싶을때는 array나 tuple로 묶어서 return한다 - 파이썬에서도 이렇게 하는 경우를 많이 봤는데 다른 언어와 결이 맞게 하려고 그런가보다. 어쨌든 이렇게 여러 값을 return하는 경우 return value의 타입 명시도 각각 다 해줘야 한다. 
+
+func favoriteBook() -> (name: String, author: String, yearPublished: Int) {
+  return ("Harry Potter and the Philosopher's Stone", "J.K. Rowling", 1997)
+}
+
+let book = favoriteBook()
+print(book) 
+
+// Prints: (name: "Harry Potter and the Philosopher\'s Stone", author: "J.K. Rowling", yearPublished: 1997)
+
+print(book.name) // Prints: Harry Potter and the Philosopher's Stone
+print(book.author) // Prints: J.K. Rowlin
+- 오잉 근데 각 return value의 이름도 지정해줘야한다. 맨위에 func 선언을 보면 첫번째꺼는 string이에요 에서 끝나는게 아니라 첫번째 꺼는 name이고요, string 타입이에요 하고 적어주고 있다. 그리고 book 출력값을 보면 마치 dict처럼 name: —, author: — 식으로 출력되는 걸 볼 수 있다. 싱기싱기. 그 안의 각 요소를 가져오고 싶을 경우 dot syntax를 사용한다. 
+- body 안에 single expression/value 만 있으면 return을 생략할 수 있는 기능은 스위프트5에서 추가된 기능이라고 한다(implicit return)
+- variadic parameter를 쓸 수 있는 것도 업데이트 된 부분. 
+
+func avgSongLength(times: Int...) -> Int {
+  var total = 0
+  for time in times {
+    total += time
+  }
+  return total / times.count
+}
+- 보면 times에는 Int형태의 초가 들어가긴 할건데 1개가 들어갈 수도 있고 100개가 들어갈 수도 있다. 이럴 때 paramType 뒤에 …을 붙여주면 된다. function call 시에는 괄호로 묶어나 하지않고 그냥 콤마로 나열해주면 된다. 그래서 한개의 func에 두개 이상의 variadic parameter를 쓸 수 없다. 
+- inout paramerter 라는 걸 쓸 수 있다. parameter로 집어넣는 argument를 바꿀 수 있게 하는 건데, 다음과 같이 paramType 앞에 inout을 명시해주면 된다
+
+func funcName(parameterName: inout parameterType) -> returnType {}
+- func call 시에는 argument 앞에 &을 붙여준다. 당연히 미리 선언된 variable을 입력해야 제대로 작동하겠쬬
 
