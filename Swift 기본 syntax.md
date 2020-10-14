@@ -103,3 +103,17 @@ func avgSongLength(times: Int...) -> Int {
 func funcName(parameterName: inout parameterType) -> returnType {}
 - func call 시에는 argument 앞에 &을 붙여준다. 당연히 미리 선언된 variable을 입력해야 제대로 작동하겠쬬
 
+- struct 는 커스터마이즈된 데이터 타입이라고 생각하면 된다. 블루프린트, 즉 오브젝트라고 일단 이해하자(스위프트에는 스트럭처도 있고 클래스도 있다)
+
+struct Name {
+  Properties
+}
+예시
+
+struct Book {
+  var title: String
+  var pages: Int
+}
+- default value를 부여하는 것도 당연히 가능하고 접근 및 재할당은 dot syntax로 가능하다
+- 
+
