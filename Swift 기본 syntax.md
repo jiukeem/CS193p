@@ -115,5 +115,53 @@ struct Book {
   var pages: Int
 }
 - default value를 부여하는 것도 당연히 가능하고 접근 및 재할당은 dot syntax로 가능하다
-- 
+- init method 
+
+struct Dog {
+  var age : Int
+  var isGood : Bool
+
+  init (age: Int, isGood: Bool) {
+    self.age = age
+    self.isGood = isGood
+  }
+}
+
+// Using the init() method:
+var bucket = Dog(age: 4, isGood: true)
+print(bucket.age)    // Prints: 4
+print(bucket.isGood) // Prints: true
+- init은 파이썬의 __init__ 과 마찬가지로 instance 생성시 자동으로 실행된다. 
+- init 앞에는 func을 생략
+- 근데 파이썬과는 다르게 struct 안 init전에 var 을 선언해주는게 필수겠네. 그리고 type 선언도 두번인게 좀 사족처럼 느껴짐 
+- 아 그래서 스위프트에는 init을 생략할 수 있는 memberwise initialization 이 있다.
+
+struct Dog {
+  var age: Int
+  var isGood: Bool
+}
+var eloise = Dog(age: 5, isGood: true)
+
+- init 이 없는데도 저렇게가 가능하다. init이 없어졌기 때문에 readability는 떨어지지만 익숙해지면 훨씬 더 간결하게 사용할 수 있다. 
+- struct 는 dot syntax를 사용. 메쏘드를 경우는 ()를 뒤에 붙여서 call
+- method는 struct 안에서 func을 사용한다 * methods : functions specific to a type
+- 메소드 중 instance property를 변경하는 메소드는 func 앞에 mutating 키워드를 꼭 붙여줘야한다. 일반적으로 self는 immutable 이기 때문에 특별히 명시해줘야 하는 것.
+- struct는 새로운 데이터 타입을 만드는거라고 생각하면 된다. 타입을 확인하는 함수인 type(of:)로 인스턴스의 타입을 확인해보면 struct의 이름이 뜨는 걸 볼 수 있다. String, Int 와 같은 위계의 타입이 하나 더 생기는 것. 즉 다른 스트럭처 안의 var의 타입을 이 스트럭처로 지정할 수도 있고 활용방법은 무궁무진하다.
+- 스위프트는 데이터타입을 두가지로 분류할 수 있는데 value type과 reference type이다. (파이썬은 레퍼런스 타입) 스트럭처는 value type이다.(클래스를 제외한 스위프트의 모든 데이터타입들은 value type이다) 모든 인스턴스(혹은 변수)에 각각의 물리적인 value를 배정한다. 밑의 예제를 보면 한번에 이해할 수 있다.
+
+var youngDog = Dog(age: 5, isGood: true)
+var oldDog = youngDog
+oldDog.age = 10
+
+print(oldDog.age)   // Prints: 10
+print(youngDog.age) // Prints: 5 
+- 파이썬이었으면 oldDog의 property를 변경하면 youngDog의 property도 같이 변화했을 거다. 여기서는 처음에 둘 다 같은 정보로 지정했음에도 물리적으로 복사붙여넣기 한 것 처럼 따로따로 행동한다. 서로 영향을 주는 관계가 아니다. 반대로 레퍼런스 타입은 하나의 데이터를 여러 변수가 포인터로 가리키고 있는 상태다. 
+
+- 스위프트에는 class 도 있는데 스트럭처와 유사하게 청사진 역할을 하지만 두가지 차이가 있다 class는 상속이 가능하고, reference type 이다. 사실상 파이썬의 클래스같은거라고 보면 되겠다. 스트럭처와 마찬가지로 property(class 안의 variable)와 method(class 안의 function)를 지닐 수 있다. init 메소드까지는 struct와 같은 syntax다.
+- 클래스의 꽃인 상속(inheritance)은 다음과 같이 사용한다
+
+class Subclass: Superclass {
+
+}
+- override 도 가능하지만, func declare 앞에 override 라고 써줘야한다.
 
