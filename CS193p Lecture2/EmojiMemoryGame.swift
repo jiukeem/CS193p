@@ -9,7 +9,13 @@ import SwiftUI
 // swift UI가 아니라 swift 파일로 만들어줬지만 사실 SwiftUI를 불러와도 된다. 얘는 Model과 View를 잇는 중간다리 역할이니까. 일단 선생님은 바꿔줬으니 나도 Foundation에서 SwiftUI로 바꿔야지
 
 class EmojiMemoryGame {
-    private(set) var model: MemoryGame<String>
+    private var model: MemoryGame<String>
+    
+    // MARK: - Access to the Model
+    
+    var cards: Array<MemoryGame<String>.Card> {
+        return model.cards  // return 은 없어도 OK
+    }
     
     // MARK: - Intent(s)
     
@@ -23,7 +29,7 @@ class EmojiMemoryGame {
 // 우리는 이모지 카드게임을 만들거니까 <>안에 String을 입력해주면 되겠다. 내가 추가로 뭔가 하지 않아도 모델 파일의 struct 이름을 가져오면 알아서 인식한다.
 /*
  class EmojiMemoryGame {
-     pvar model: MemoryGame<String>
+     var model: MemoryGame<String>
      
  }
  */
@@ -37,10 +43,31 @@ class EmojiMemoryGame {
  class EmojiMemoryGame {
      private(set) var model: MemoryGame<String>
      
-     // MARK: - Intent(s)
-     
      func choose(card: MemoryGame<String>.Card) {    //Card의 풀네임을 써줘야한다
          model.choose(card: card)
      }
  }
  */
+
+
+// 아니면 private(set)을 이용하는 대신, private으로 해놓고 좀 더 restrictive 하게 view에게 정보를 제공할 수도 있다. var cards 를 만들어서 보여주고 싶은 부분만(카드 정보) 보여줄 수도 있다.(이 부분 신택스 제대로 이해 못함) 지금은 똑같아 보이지만 이 방식의 좋은 점은 view에게 넘겨주는 데이터를 더 간단하게 interpret 해서 넘겨줄 수 있다는 점이다. view에게 최대한 간결하고 이해가 쉬운 방식으로 넘겨줄수록 좋다.
+/*
+ class EmojiMemoryGame {
+     private var model: MemoryGame<String>
+ 
+     var cards: Array<MemoryGame<String>.Card> {
+         return model.cards  // return 은 없어도 OK
+     }
+     
+     func choose(card: MemoryGame<String>.Card) {
+         model.choose(card: card)
+     }
+ }
+ */
+
+// *참고: // MARK: -
+// 는 맨위에 CS193p Lecture2 > Cs193p Lecture2 > EmojiMemoryGame.swift > 에서 항목을 선택할 수 있게 해준다. 바로옆에 작은 미리보기에도 뜨고.
+// 여기까지가 ViewModel의 가장 기본얼개다. private(set) 을 써서 닫힌 유리문을 써도 되고, 아니면 위의 코드처럼 아예 막아버린 뒤 인터폰 화면만 보여줘도 된다. 그리고 그 밑에는 거의 기본 도큐먼트라고 할 정도로 intent 부분을 넣는다.
+
+// 이제 코드에 뜨는 에러문구를 보자. 아까부터 계속 있었는데, Class 'EmojiMemoryGame' has no initializers 라는 에러가 계속 뜬다.
+// var인 model은 MemortGame 스트럭처의 타입인 var인데 그 스트럭처의 init이 안됐다는 것. 모델 파일로 넘어가서 MemoryGame 스트럭처 안에 init function을 만들어주자.

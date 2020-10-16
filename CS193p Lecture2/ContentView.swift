@@ -134,7 +134,7 @@ func square(operand: Double) -> Double {
 // let result2 = operation(4) 를 하면 2가 된다.
 
 // function에 대해 설명하면서 마지막에 closure을 언급했는데 아직 이해가 안가서 일단 필기만 옮겨적어놓는다.
-// it's so common to pass funtions around that we are veru often 'inining' them. We call such an inlined funtion a 'closure' ans there's special language support for it. We'll cover this in the demo and again later in the quarter.
+// it's so common to pass funtions around that we are very often 'in-lining' them. We call such an inlined funtion a 'closure' and there's special language support for it. We'll cover this in the demo and again later in the quarter.
 
 // enum 과 protocol이 남았는데 이건 다음번에 설명할거고 이제 데모로 돌아가서 렉처1 결과물에 MVVM을 적용시켜 보자.
 
@@ -178,8 +178,8 @@ struct ContentView_Previews: PreviewProvider {
 
 
 // 자 우리가 지난시간에 작업한 모든건 View였다 MVVM중 첫번째 V. 오늘은 Model을 작업해서, 여기에 logic을 불어넣어 보자.
-// 자 그러려면 file에서 new file을 만들어주자. UI말고 그냥 swift 파일로. 같은 폴더인 CS193p Lecture2 에 저장했고 여기다가 model을 구축할거다. 그쪽으로 넘어가자. 쑝
+// 자 그러려면 file에서 new file을 만들어주자. UI말고 그냥 swift 파일로. 같은 폴더인 CS193p Lecture2 에 저장했고 여기다가 model을 구축할거다. 그쪽으로 넘어가자. 쑝 (파일이름 MemoryGame)
 
-// 자 MemoryGame 에서 Model을 구축해줬다면 우리는 이제 UI dependent 한 View(이 파일)와 UI independent 한 Model(MemoryGame 파일)을 이어줄 ViewModel을 만들거다.
+// 자 다시 돌아와서 MemoryGame 에서 Model을 구축해줬다면 우리는 이제 UI dependent 한 View(이 파일)와 UI independent 한 Model(MemoryGame 파일)을 이어줄 ViewModel을 만들거다.
 // ViewModel에 해당하는 파일도 만들어주자. 파일 만들 때 보면 EmojiMemoryGame 이라고 이름을 붙인다. 그리고 우리는 Model 파일에서 이모지가 아닌 다른 타입의 컨텐트를 쓰는 카드라고 하더라도 돌아갈 수 있게 구축했다(CardContent 라는 generic을 만들어 줬다).
 // 내가 느끼기엔 마치 파이썬의 class 와 instance의 관계 같다. Model에서 청사진을 만들어서 넘겨주면 각각의 ViewModel(만약 여러개라면)이 그걸 자기네의 필요에 맞게(하지만 Model의 로직을 벗어나지 않는 한에서) 사용하는거다. 우리는 이모지를 쓰는 메모리게임을 만들거니까 ViewModel의 이름은 EmojiMemoryGame 이 됐다.
